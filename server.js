@@ -10,7 +10,8 @@ server.use(express.urlencoded({extended: true}));
 
 
 //Routes here
-
+require("./routes/htmlRoutes")(server);
+require("./routes/apiRoutes")(server);
 
 
 
