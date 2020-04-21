@@ -1,4 +1,5 @@
 const db = require("../models");
+const mongojs = require("mongojs");
 
 
 module.exports = function(server){
@@ -31,7 +32,7 @@ module.exports = function(server){
         console.log(excersizeData);
        
 
-        db.Workout.updateOne({ _id: id}, { $push: { exercises: excersizeData }}, (error, updatedWorkout) => {
+        db.Workout.updateOne({ _id: mongojs.ObjectId(id) }, { $push: { exercises: excersizeData }}, (error, updatedWorkout) => {
             if(error){
                 console.log("error updating workout")
             }
