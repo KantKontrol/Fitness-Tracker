@@ -28,13 +28,17 @@ module.exports = function(server){
 
         let id = req.params.id;
         let excersizeData = req.body;
+        console.log(excersizeData);
+       
 
-        db.Workout.update({ __id: id}, { $push: { excersize: excersizeData }}, (error, updatedWorkout) => {
+        db.Workout.updateOne({ _id: id}, { $push: { exercises: excersizeData }}, (error, updatedWorkout) => {
             if(error){
                 console.log("error updating workout")
             }
-            else
+            else{
                 res.json(updatedWorkout);
+            }
+                
         });
     });
 
@@ -44,7 +48,6 @@ module.exports = function(server){
                 console.log("Error finding workout range")
             }
             else {
-                console.log(data);
                 res.json(data);
             }
                 

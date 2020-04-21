@@ -10,7 +10,7 @@ let workoutSchema = new Schema({
         type: Date,
         default: Date.now()
     },
-    excersizes: [
+    exercises: [
         {
             type: {
                 type: String,

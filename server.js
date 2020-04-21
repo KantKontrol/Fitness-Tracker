@@ -1,10 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const logger = require("morgan");
 
 
 const server = express();
 const PORT = process.env.PORT || 8080;
 
+
+server.use(logger("dev"));
 server.use(express.static("public"));
 server.use(express.json());
 server.use(express.urlencoded({extended: true}));
