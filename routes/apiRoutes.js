@@ -1,5 +1,5 @@
 const db = require("../models");
-const mongojs = require("mongojs");
+
 
 module.exports = function(server){
 
@@ -12,12 +12,30 @@ module.exports = function(server){
         }); 
     });
 
-    server.put("/api/workouts/:id", ({ body }, res) => {
+    server.get("/api/workouts/range", (req, res) => {
+        db.Workout.find({}, data => {
 
-        db.Workout.create({
-            day: 
+            res.json(data);
+        }); 
+    });
+
+    server.put("/api/workouts/:id", ( req , res) => {
+
+        let id = req.params.id;
+        console.log(id);
+        console.log(req.body);
+
+    
+
+    });
+
+    server.post("/api/workouts", (req, res) => {
+        db.Workout.create({}).then(data => {
+            res.json(data);
         })
-
+        .catch(err => {
+            console.log(err);
+        });
     });
 
 
@@ -26,7 +44,7 @@ module.exports = function(server){
         let id = req.params.id;
 
         db.Workout.find({
-            __id: mongojs.ObjectId(id)
+            __id: id
         }, data => {
 
 
