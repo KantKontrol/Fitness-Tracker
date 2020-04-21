@@ -6,27 +6,8 @@ module.exports = function(server){
 
     server.get("/api/workouts", (req, res) => {
         db.Workout.find({}, data => {
-
-
             res.json(data);
         }); 
-    });
-
-    server.get("/api/workouts/range", (req, res) => {
-        db.Workout.find({}, data => {
-
-            res.json(data);
-        }); 
-    });
-
-    server.put("/api/workouts/:id", ( req , res) => {
-
-        let id = req.params.id;
-        console.log(id);
-        console.log(req.body);
-
-    
-
     });
 
     server.post("/api/workouts", (req, res) => {
@@ -38,19 +19,30 @@ module.exports = function(server){
         });
     });
 
-
-    server.get("/excersize/:id", (req, res) => {
-
-        let id = req.params.id;
-
-        db.Workout.find({
-            __id: id
-        }, data => {
-
-
+    server.get("/api/workouts/range", (req, res) => {
+        db.Workout.find({}, data => {
+            console.log(data);
             res.json(data);
         }); 
     });
+
+    server.put("/api/workouts/:id", (req , res) => {
+
+        let id = req.params.id;
+        let excersizeData = req.body;
+
+        db.Workout.update({ __id: id}, { $push: { excersize: excersizeData}}, updatedWorkout => {
+
+
+            res.json(updatedWorkout);
+        });
+
+    });
+
+
+
+
+
 
 
 }
