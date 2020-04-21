@@ -29,9 +29,7 @@ module.exports = function(server){
 
         let id = req.params.id;
         let excersizeData = req.body;
-        console.log(excersizeData);
-       
-
+        
         db.Workout.updateOne({ _id: mongojs.ObjectId(id) }, { $push: { exercises: excersizeData }}, (error, updatedWorkout) => {
             if(error){
                 console.log("error updating workout")
