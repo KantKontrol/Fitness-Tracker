@@ -30,6 +30,7 @@ function tallyExercises(exercises) {
     }
     return acc;
   }, {});
+  
   return tallied;
 }
 
